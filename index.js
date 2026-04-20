@@ -18,6 +18,11 @@ app.get("/heart-beat", (req, res) => {
   res.status(200).json({message: "Server is alive!"});
 })
 
+app.post("/echo", (req, res) => {
+  const { name } = req.body;
+  res.status(200).json({ echo: `Hello, ${name}` });
+});
+
 // app.listen(port-number, function)
 
 app.listen(PORT, () => {
