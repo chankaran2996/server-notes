@@ -1,35 +1,36 @@
 import express from "express";
+import { 
+    allUser, 
+    deleteUser, 
+    login, 
+    register, 
+    updateProfile
+} from "../controller/authcontroller.js";
+// import { 
+//     allUser, 
+//     register
+// } from "../controller/authroller.js";
 
 const authRouter = express.Router();
 
 // Get Method
 
-authRouter.get("/all-users", (req, res) => {
-    res.status(200).json({message: "List of all users"});
-})
+authRouter.get("/all-users", allUser)
 
 // Post Method
 
-authRouter.post("/register", (req, res) => {
-    res.status(201).json({message: "User registered successfully"});
-})
+authRouter.post("/register", register)
 
 
-authRouter.post("/login", (req, res) => {    
-    res.status(200).json({message: "User logged in successfully"});
-})
+authRouter.post("/login", login)
 
 
 // Put Method
-authRouter.put("/update-profile", (req, res) => {
-    res.status(200).json({message: "User profile updated successfully"});
-})
+authRouter.put("/update-profile", updateProfile)
 
 
 // Delete Method
-authRouter.delete("/delete-account", (req, res) => {
-    res.status(200).json({message: "User account deleted successfully"});
-})
+authRouter.delete("/delete-account", deleteUser)
 
 
 export default authRouter;
