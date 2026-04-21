@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import connectDB from './data_base/connection.js';
+import authRouter from './routers/authrouthers.js';
 
 dotenv.config();
 
@@ -22,6 +23,8 @@ app.post("/echo", (req, res) => {
   const { name } = req.body;
   res.status(200).json({ echo: `Hello, ${name}` });
 });
+
+app.use("/api/v1/auth", authRouter)
 
 // app.listen(port-number, function)
 
