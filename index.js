@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './data_base/connection.js';
 import authRouter from './routers/authrouthers.js';
 import gameRouter from './routers/gameRouters.js';
+import { product } from './middleware/authMiddlieware.js';
 // import authRouter from './routers/authuthers.js';
 
 dotenv.config();

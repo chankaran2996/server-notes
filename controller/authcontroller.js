@@ -1,5 +1,6 @@
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
+import transporter from "../config/mailAuth.js";
 
 export const allUser = (req, res) => {
     res.status(200).json({message: "List of all users"});
@@ -22,6 +23,19 @@ export const register = async (req, res) => {
             email,
             password
         })
+        const mailOptions = {
+            from: process.env.EMAIL_ID,
+            to: email,
+            subject: "Welcome to our platform",
+            // text: `Hello ${name},\n\nThank you for registering on our platform. We're excited to have you on board!\n\nBest regards,\nThe Team`,
+            html:`<p>Hello ${name},</p>
+            <p>Thank you for registering on our platform. We're excited to have you on board!</p>
+            <p>Best regards,<br>The Team</p>`
+        };
+        await transporter.sendMail(mailOptions);
+        console.log("Welcome email sent successfully");
+
+
 
         res.status(201).json({message: "User registered successfully", user: responce});
         
