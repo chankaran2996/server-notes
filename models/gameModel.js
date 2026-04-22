@@ -5,6 +5,17 @@ const gameSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    player1id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+    player2id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+
     player2Name: {
         type: String,
         required: true,
