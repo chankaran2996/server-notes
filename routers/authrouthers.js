@@ -6,6 +6,7 @@ import {
     register, 
     updateProfile
 } from "../controller/authcontroller.js";
+import { isAdmin, product } from "../middleware/authMiddlieware.js";
 // import { 
 //     allUser, 
 //     register
@@ -26,7 +27,7 @@ authRouter.post("/login", login)
 
 
 // Put Method
-authRouter.put("/update-profile", updateProfile)
+authRouter.put("/update-profile", product , updateProfile)
 
 
 // Delete Method

@@ -34,12 +34,12 @@ export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         if (!email || !password) {
-            return res.status(400).json({message: "Email and password are required"});
+            return res.status(401).json({message: "Email and password are required"});
         }
 
         const findUser = await User.findOne({email});
         if (!findUser) {
-            return res.status(400).json({message: "Invalid email or password"});
+            return res.status(401).json({message: "Invalid email or password"});
         }
         const isMatch = await findUser.comparePassword(password);
         if (!isMatch) {
@@ -53,8 +53,23 @@ export const login = async (req, res) => {
     }
 }
 
-export const updateProfile = (req, res) => {
-    res.status(200).json({message: "User profile updated successfully"});
+export const updateProfile = async (req, res) => {
+    try {
+        let { name, email } = req.body;
+        if(!name){
+            name = req.user.name;
+        }
+        if(!email){
+            email = req.user.email;
+        }
+        req.user.name = name;
+        req.user.email = email;
+        const updatedUser = await req.user.save();
+        res.status(200).json({message: "User profile updated successfully"});
+        
+    } catch (error) {
+        res.status(500).json({message: "Internal server error", error: error.message});
+    }
 }
 
 export const deleteUser = (req, res) => {
